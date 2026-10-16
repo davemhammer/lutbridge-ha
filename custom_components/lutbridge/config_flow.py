@@ -7,7 +7,7 @@ from homeassistant import config_entries
 from homeassistant.core import callback
 from homeassistant.exceptions import HomeAssistantError
 
-from .const import CONF_BASE, DEFAULT_BASE, DOMAIN
+from .const import BRIDGE_REPO_URL, CONF_BASE, DEFAULT_BASE, DOMAIN
 
 
 class LutBridgeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -19,7 +19,9 @@ class LutBridgeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is not None:
             return self.async_create_entry(title="Lutron Pico fallback", data=user_input)
         return self.async_show_form(
-            step_id="user", data_schema=vol.Schema({vol.Required(CONF_BASE, default=DEFAULT_BASE): str})
+            step_id="user",
+            data_schema=vol.Schema({vol.Required(CONF_BASE, default=DEFAULT_BASE): str}),
+            description_placeholders={"bridge_url": BRIDGE_REPO_URL},
         )
 
     @staticmethod

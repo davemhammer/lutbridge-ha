@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Lutron Pico fallback bridge",
-        "description": "Needs the MQTT integration, Zigbee2MQTT, and the lutbridge-esp32 bridge paired with it (firmware, wiring and pairing: https://github.com/davemhammer/lutbridge-esp32).",
+        "description": "Needs the MQTT integration, Zigbee2MQTT, and the lutbridge-esp32 bridge paired with it (firmware, wiring and pairing: {bridge_url}).",
         "data": {
           "base_topic": "Zigbee2MQTT base topic"
         }
@@ -30,7 +30,7 @@
   "issues": {
     "board_not_found": {
       "title": "Pico bridge not found",
-      "description": "{detail} The bridge firmware, wiring and pairing instructions are at https://github.com/davemhammer/lutbridge-esp32"
+      "description": "{detail} The bridge firmware, wiring and pairing instructions are at {bridge_url}"
     },
     "z2m_offline": {
       "title": "Zigbee2MQTT is offline",
@@ -58,7 +58,7 @@
     },
     "firmware": {
       "title": "Pico bridge firmware is out of date",
-      "description": "{detail} Firmware and instructions: https://github.com/davemhammer/lutbridge-esp32"
+      "description": "{detail} Firmware and instructions: {bridge_url}"
     }
   },
   "services": {
