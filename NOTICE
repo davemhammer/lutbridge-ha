@@ -1,0 +1,15 @@
+lutbridge-ha: a Home Assistant integration that gives Lutron Pico remotes a Zigbee fallback
+Copyright 2026 Dave Hammer
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Trademarks. Lutron, Caseta, Pico and Clear Connect are trademarks of Lutron Electronics Co., Inc. Zigbee is a
+trademark of the Connectivity Standards Alliance. Home Assistant and Zigbee2MQTT are projects of their respective
+communities. This project is independent: it is not affiliated with, endorsed by, or supported by any of them, and
+the names are used only to say what it works with.
+
+Companion project: lutbridge-esp32 (https://github.com/davemhammer/lutbridge-esp32), the bridge firmware. The
+Zigbee2MQTT converter bundled here (custom_components/lutbridge/pico_bridge.mjs) is a copy of that project's, under the
+same license.
+
+The brand icon (custom_components/lutbridge/brand) is original artwork released under the same license.

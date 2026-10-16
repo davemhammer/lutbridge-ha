@@ -1,0 +1,37 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integration:
+    name: Integration logic and glue
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python -m pip install pytest
+      - run: python -m pytest -q
+
+  converter:
+    name: Bundled converter matches lutbridge-esp32
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node --check custom_components/lutbridge/pico_bridge.mjs
+      - name: Compare with the converter in the bridge repository
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/davemhammer/lutbridge-esp32/main/z2m/pico_bridge.mjs -o /tmp/bridge.mjs
+          cmp /tmp/bridge.mjs custom_components/lutbridge/pico_bridge.mjs

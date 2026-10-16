@@ -1,0 +1,23 @@
+{
+  "domain": "lutbridge",
+  "name": "Lutron Pico Fallback Bridge",
+  "after_dependencies": [
+    "lutron_caseta",
+    "automation",
+    "light",
+    "group"
+  ],
+  "codeowners": [
+    "@davemhammer"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "mqtt"
+  ],
+  "documentation": "https://github.com/davemhammer/lutbridge-ha",
+  "integration_type": "service",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/davemhammer/lutbridge-ha/issues",
+  "requirements": [],
+  "version": "0.2.0"
+}

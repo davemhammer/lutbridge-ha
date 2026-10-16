@@ -1,0 +1,90 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Lutron Pico fallback bridge",
+        "description": "Needs the MQTT integration, Zigbee2MQTT, and the lutbridge-esp32 bridge paired with it (firmware, wiring and pairing: https://github.com/davemhammer/lutbridge-esp32).",
+        "data": {
+          "base_topic": "Zigbee2MQTT base topic"
+        }
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Review the fallback changes",
+        "description": "{review}\n\nPlan `{plan_id}`. Nothing changes until you turn on **Apply these changes** and submit.\n\n{problem}",
+        "data": {
+          "apply": "Apply these changes"
+        }
+      }
+    },
+    "error": {
+      "apply_failed": "The changes could not be applied; see the message above and the Heartbeat/Plan sensors."
+    }
+  },
+  "issues": {
+    "board_not_found": {
+      "title": "Pico bridge not found",
+      "description": "{detail} The bridge firmware, wiring and pairing instructions are at https://github.com/davemhammer/lutbridge-esp32"
+    },
+    "z2m_offline": {
+      "title": "Zigbee2MQTT is offline",
+      "description": "{detail}"
+    },
+    "board_offline": {
+      "title": "Pico bridge is offline",
+      "description": "{detail}"
+    },
+    "heartbeat": {
+      "title": "Fallback heartbeat is not running",
+      "description": "{detail}"
+    },
+    "converter": {
+      "title": "Pico bridge converter is out of date",
+      "description": "{detail}"
+    },
+    "drift": {
+      "title": "Pico mapping is out of date",
+      "description": "{detail}"
+    },
+    "on_fallback": {
+      "title": "Picos are running on the fallback",
+      "description": "{detail}"
+    },
+    "firmware": {
+      "title": "Pico bridge firmware is out of date",
+      "description": "{detail} Firmware and instructions: https://github.com/davemhammer/lutbridge-esp32"
+    }
+  },
+  "services": {
+    "plan": {
+      "name": "Make plan",
+      "description": "Work out which Zigbee lights each Pico should control and what must change, and show it for approval.",
+      "fields": {
+        "rewrite_slots": {
+          "name": "Rewrite all slots",
+          "description": "Ignore what was remembered about the board's slots and clear and rewrite every one. Use after reflashing or erasing the board."
+        }
+      }
+    },
+    "apply": {
+      "name": "Apply plan",
+      "description": "Apply the plan that was last shown. Refuses if the system changed since it was made.",
+      "fields": {
+        "plan_id": {
+          "name": "Plan id",
+          "description": "The id shown with the plan. Optional; if given it must match the plan that was shown."
+        }
+      }
+    },
+    "install_converter": {
+      "name": "Install converter",
+      "description": "Send the bundled Zigbee2MQTT converter for the pico bridge to Zigbee2MQTT over MQTT."
+    }
+  }
+}

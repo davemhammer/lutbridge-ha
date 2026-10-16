@@ -1,0 +1,23 @@
+plan:
+  name: Make plan
+  description: Work out which Zigbee lights each Pico should control and what must change, and show it for approval.
+  fields:
+    rewrite_slots:
+      name: Rewrite all slots
+      description: Ignore what was remembered about the C6's slots and clear and rewrite every one. Use after reflashing or erasing the C6.
+      required: false
+      selector:
+        boolean:
+apply:
+  name: Apply plan
+  description: Apply the plan that was last shown. Refuses if the system changed since it was made.
+  fields:
+    plan_id:
+      name: Plan id
+      description: The id shown with the plan. Optional; if given it must match the plan that was shown.
+      required: false
+      selector:
+        text:
+install_converter:
+  name: Install converter
+  description: Send the bundled Zigbee2MQTT converter for the pico bridge to Zigbee2MQTT over MQTT.

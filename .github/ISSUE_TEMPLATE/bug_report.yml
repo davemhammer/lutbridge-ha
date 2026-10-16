@@ -1,0 +1,28 @@
+name: Bug report
+description: Something does not work as described
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Integration version (Settings > Devices & services > Lutron Pico Fallback Bridge), Home Assistant, Zigbee2MQTT, firmware build date.
+    validations:
+      required: true
+  - type: textarea
+    id: state
+    attributes:
+      label: Entity state
+      description: The state and attributes of the Plan, Heartbeat and Health sensors (Developer tools > States).
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Home Assistant log lines mentioning lutbridge, and the board's serial console output if the problem is a press that was not handled.
+      render: text
