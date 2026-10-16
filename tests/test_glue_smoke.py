@@ -517,6 +517,15 @@ def options_flow(runtime):
     return flow
 
 
+def test_the_setup_form_supplies_the_bridge_url_its_text_refers_to():
+    cf = importlib.import_module("lutbridge.config_flow")
+    flow = cf.LutBridgeConfigFlow()
+    flow._async_current_entries = lambda: []
+    flow.async_show_form = lambda **kw: ("form", kw)
+    kind, form = asyncio.run(flow.async_step_user())
+    assert kind == "form" and form["description_placeholders"] == {"bridge_url": "https://github.com/davemhammer/lutbridge-esp32"}
+
+
 def test_configure_shows_the_review_and_applies_nothing_until_asked():
     rt = OptionsRuntime()
     kind, form = asyncio.run(options_flow(rt).async_step_init())
@@ -628,6 +637,7 @@ def test_old_firmware_that_cannot_claim_per_pico_falls_back_to_all_or_nothing(mo
     asyncio.run(rt._beat())
     assert rt.orch.claims == [] and rt.heartbeat.startswith("withheld:") and "firmware cannot claim per Pico" in rt.heartbeat
     assert "firmware" in log.open and "lutbridge-esp32" in log.open["firmware"]["translation_placeholders"]["detail"]
+    assert log.open["firmware"]["translation_placeholders"]["bridge_url"] == "https://github.com/davemhammer/lutbridge-esp32"
     # with nothing left out the plain claim is fine on any firmware
     rt.hass.states.autos["Hall"] = "on"
     asyncio.run(rt._beat())

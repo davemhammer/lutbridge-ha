@@ -61,6 +61,18 @@ def test_every_health_problem_has_repairs_text():
         assert text["title"] and "{detail}" in text["description"], key
 
 
+def test_translation_strings_hold_no_urls_because_hassfest_forbids_them():
+    def walk(node, path=""):
+        if isinstance(node, dict):
+            for k, v in node.items():
+                yield from walk(v, f"{path}.{k}")
+        elif isinstance(node, str):
+            yield path, node
+
+    offenders = [path for path, text in walk(STRINGS) if "http://" in text or "https://" in text]
+    assert offenders == []
+
+
 def test_every_service_is_described_in_the_translations():
     services = re.findall(r"^([a-z_]+):\s*$", (PKG / "services.yaml").read_text(), re.M)
     assert services and set(services) == set(STRINGS["services"])
@@ -101,8 +113,9 @@ def test_the_integration_points_at_the_bridge_project():
     from_const = (PKG / "const.py").read_text()
     assert "https://github.com/davemhammer/lutbridge-esp32" in from_const
     assert "lutbridge-esp32" in (ROOT / "README.md").read_text()
-    assert "lutbridge-esp32" in STRINGS["config"]["step"]["user"]["description"]
-    assert "lutbridge-esp32" in STRINGS["issues"]["board_not_found"]["description"]
+    assert "{bridge_url}" in STRINGS["config"]["step"]["user"]["description"]
+    assert "{bridge_url}" in STRINGS["issues"]["board_not_found"]["description"]
+    assert "{bridge_url}" in STRINGS["issues"]["firmware"]["description"]
 
 
 def test_manifest_urls_match_this_repository():

@@ -20,7 +20,7 @@ from homeassistant.util import dt as dt_util
 
 from . import collect
 from .const import (
-    CONF_BASE, DEFAULT_BASE, DOMAIN, DRIFT_CHECK_SECONDS, FIRST_DRIFT_CHECK_SECONDS, HEARTBEAT_SECONDS,
+    BRIDGE_REPO_URL, CONF_BASE, DEFAULT_BASE, DOMAIN, DRIFT_CHECK_SECONDS, FIRST_DRIFT_CHECK_SECONDS, HEARTBEAT_SECONDS,
     NOTIFICATION_ID, SIGNAL_UPDATE, STORE_VERSION,
 )
 from .core import health, heartbeat, pipeline, z2m
@@ -206,7 +206,7 @@ class Runtime:
             if self._issues.get(key) != detail:  # raise it when new or reworded, not on every heartbeat
                 self._issues[key] = detail
                 ir.async_create_issue(self.hass, DOMAIN, key, is_fixable=False, severity=_severity(key),
-                                      translation_key=key, translation_placeholders={"detail": detail})
+                                      translation_key=key, translation_placeholders={"detail": detail, "bridge_url": BRIDGE_REPO_URL})
         for key in sorted(set(self._issues) - set(self.health.problems)):
             ir.async_delete_issue(self.hass, DOMAIN, key)
             del self._issues[key]
