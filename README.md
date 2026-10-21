@@ -21,8 +21,8 @@ on your Zigbee network until you approve it.
 ```
 
 - It **derives** the mapping: for each Lutron Caseta Pico it reads your automations (device triggers that turn lights
-  on, off or toggle, and the `smartqasa/lutron_pico_5_light` blueprint) and works out the Zigbee lights behind them,
-  expanding light groups.
+  on, off or toggle, and the `smartqasa/lutron_pico_5_light` blueprint or its 2-button counterpart
+  `lutron_pico_2_light`) and works out the Zigbee lights behind them, expanding light groups.
 - It **plans** the change: a Zigbee2MQTT group per Pico (named `lutbridge_<pico name>`, or an existing group with
   exactly the right lights), a slot in the bridge, and a bind. You review and approve it.
 - It **claims** for the Picos Home Assistant is handling, every 15 s. A claim lasts 45 s. A Pico whose source

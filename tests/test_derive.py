@@ -43,6 +43,18 @@ def test_r2_smartqasa_blueprint_covers_four_buttons_not_favorite():
     assert not unmapped
 
 
+def test_r2_two_button_blueprint_covers_on_and_off_only():
+    # The user/ folder is irrelevant; blueprints are matched by file name.
+    two = {"alias": "Lutron Pico - Kitchen Counter Left (2-button)", "id": "1792513115580",
+           "use_blueprint": {"input": {"entity": ["light.kitchen_counter_lights"], "pico": LIVING_ROOM},
+                             "path": "user/lutron_pico_2_light.yaml"}}
+    intents, unmapped = derive.derive([two], PICOS)
+    t = intents[LIVING_ROOM].targets
+    assert set(t) == {pico.ON, pico.OFF}
+    assert all(x.entities == {"light.kitchen_counter_lights"} and "blueprint" in x.flags for x in t.values())
+    assert not unmapped
+
+
 def test_buttons_of_one_pico_accumulate_across_automations():
     off = {**PICO_KITCHEN_LIGHTS_ON, "alias": "Off", "triggers": [{**PICO_KITCHEN_LIGHTS_ON["triggers"][0], "subtype": "off"}],
            "actions": [{"action": "light.turn_off", "target": {"entity_id": ["light.a", "light.b"]}}]}

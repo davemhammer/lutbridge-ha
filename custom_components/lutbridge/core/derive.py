@@ -6,7 +6,8 @@ Deterministic rules, no language model. Two shapes are understood:
 
   R1  a lutron_caseta device trigger on a Pico (device_id + subtype) whose actions call a light, switch or
       homeassistant on/off/toggle service on entities;
-  R2  the smartqasa/lutron_pico_5_light blueprint (pico + entity list).
+  R2  a Pico blueprint (pico + entity list): smartqasa/lutron_pico_5_light (on, off, raise, lower) or the
+      2-button lutron_pico_2_light (on, off).
 
 Anything else that mentions a Pico is reported as unmapped, with the reason, instead of guessed at. Automation
 conditions are ignored on purpose (the fallback is plain on/off/dim) but flagged, so the plan can show them.
@@ -27,6 +28,7 @@ LIGHT_SERVICES = {
 # Blueprints whose inputs we understand: path suffix -> buttons the blueprint wires to its entity list.
 BLUEPRINTS = {
     "lutron_pico_5_light.yaml": pico.ON | pico.OFF | pico.RAISE | pico.LOWER,
+    "lutron_pico_2_light.yaml": pico.ON | pico.OFF,
 }
 
 

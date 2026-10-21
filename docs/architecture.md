@@ -28,7 +28,8 @@ logic is tested against a fake Zigbee2MQTT without Home Assistant.
    - R1: a device trigger on a Pico (`device_id`, `subtype`, `type`) whose actions call `light.turn_on`,
      `light.turn_off` or `light.toggle` on light entities maps that button to those lights.
    - R2: the `smartqasa/lutron_pico_5_light` blueprint (`pico` plus `entity` list) maps all four dimming buttons to
-     those lights.
+     those lights; the 2-button `lutron_pico_2_light` blueprint maps on and off. Blueprints are matched by file name,
+     whatever folder they are installed under.
    - Anything else is listed as not covered, with the reason. Automation conditions are ignored on purpose (the
      fallback is plain on/off/dim) and flagged in the plan.
 

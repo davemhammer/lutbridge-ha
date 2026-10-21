@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- **2-button blueprint.** Automations built on the `lutron_pico_2_light` blueprint (on and off for a 2-button Pico)
+  are now derived like the 5-button one, instead of being reported as not understood.
+
 ## 0.2.0
 
 - **Own repository.** The integration now lives here, apart from the bridge firmware
