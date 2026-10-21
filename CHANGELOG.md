@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.0
 
 - **2-button blueprint.** Automations built on the `lutron_pico_2_light` blueprint (on and off for a 2-button Pico)
   are now derived like the 5-button one, instead of being reported as not understood.
